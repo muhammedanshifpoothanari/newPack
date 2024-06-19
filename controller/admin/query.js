@@ -1,44 +1,34 @@
-const Order = require('../../models/order');
+const Query = require('../../models/query');
 
-const getAllOrders = async (req, res) => {
+const getAllQuerys = async (req, res) => {
     try {
-        const orders = await Order.find();
-        res.json(orders);
+        const querys = await Query.find();
+        res.json(querys);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 }
 
-const getOrdersByUserId = async (req, res) => {
-    const userId = req.params.userId;
-    try {
-        const orders = await Order.find({ user: userId });
-        res.json(orders);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-}
 
-const getOrderById = async (req, res) => {
-    const orderId = req.params.orderId;
+const getqueryById = async (req, res) => {
+    const queryId = req.params.queryId;
     try {
-        const order = await Order.findById(orderId);
-        if (!order) {
-            return res.status(404).json({ error: 'Order not found' });
+        const query = await Query.findById(queryId);
+        if (!query) {
+            return res.status(404).json({ error: 'query not found' });
         }
-        res.json(order);
+        res.json(query);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 }
 
-const countTotalSalesPerMonth = async (req, res) => {
+const countTotalQuerysPerMonth = async (req, res) => {
     const month = req.params.month; 
     try {
-        const totalSales = await Order.aggregate([
+        const totalQuerys = await Query.aggregate([
             {
                 $match: {
                     createdAt: {
@@ -54,17 +44,17 @@ const countTotalSalesPerMonth = async (req, res) => {
                 }
             }
         ]);
-        res.status(200).send(totalSales);
+        res.status(200).send(totalQuerys);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 }
 
-const countTotalSalesPerYear = async (req, res) => {
+const countTotalQuerysPerYear = async (req, res) => {
     const year = req.params.year; 
     try {
-        const totalSales = await Order.aggregate([
+        const totalQuerys = await Query.aggregate([
             {
                 $match: {
                     createdAt: {
@@ -81,35 +71,35 @@ const countTotalSalesPerYear = async (req, res) => {
                 }
             }
         ]);
-        res.json(totalSales);
+        res.json(totalQuerys);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 }
 
-const getAllRecentSales = async (req, res) =>{
+const getAllRecentQuerys = async (req, res) =>{
     try {
-        const orders = await Order.find().sort({ createdAt: -1 }).limit(15); 
-        res.json(orders);
+        const querys = await Query.find().sort({ createdAt: -1 }).limit(15); 
+        res.json(querys);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 }
 
-const deliveredOrder = async (req, res) => {
+const deliveredquery = async (req, res) => {
     console.log('vffdfds');
-    const orderId = req.body.id;
+    const queryId = req.body.id;
     console.log(req.body,'vffdfds');
     try {
-        const order = await Order.findById(orderId);
-        if (!order) {
+        const query = await Query.findById(queryId);
+        if (!query) {
             return res.status(404).json({ error: 'User not found' });
         }
-        order.isDelivered = req.body.isDelivered;
-        await order.save();
-        res.json({ message: 'order delivered successfully' });
+        query.isFulfilled = req.body.isFulfilled;
+        await query.save();
+        res.json({ message: 'query delivered successfully' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
@@ -118,11 +108,10 @@ const deliveredOrder = async (req, res) => {
 
 
 module.exports = {
-    getAllOrders,
-    getOrdersByUserId,
-    getOrderById,
-    countTotalSalesPerMonth,
-    countTotalSalesPerYear,
-    getAllRecentSales,
-    deliveredOrder
+    getAllQuerys,
+    getqueryById,
+    countTotalQuerysPerMonth,
+    countTotalQuerysPerYear,
+    getAllRecentQuerys,
+    deliveredquery
 };

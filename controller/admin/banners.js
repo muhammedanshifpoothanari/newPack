@@ -11,11 +11,20 @@ const getAllBanners = async (req, res) => {
 }
 
 const createBanners = async (req, res) => {
-    const { name, assetId } = req.body;
+    const {
+        assetId,
+        highlight,
+        description,
+        link,
+        linkText
+    } = req.body;
     try {
         const newBanners = new Banners({
-            name,
-            assetId
+            assetId,
+            highlight,
+            description,
+            link,
+            linkText
         });
         await newBanners.save();
         res.status(201).json({ Banners: newBanners });
@@ -28,14 +37,23 @@ const createBanners = async (req, res) => {
 const updateBanners = async (req, res) => {
     const BannerId = req.params.BannerId;
     console.log(req.params);
-    const { name, assetId, isBlocked } = req.body;
+    const {
+        assetId,
+        highlight,
+        description,
+        link,
+        linkText,
+        isBlocked } = req.body;
     try {
         const banners = await Banners.findById(BannerId);
         if (!banners) {
             return res.status(404).json({ error: 'Banners not found' });
         }
         if(isBlocked) Banners.isBlocked = isBlocked;
-        banners.name = name;
+        banners.highlight = highlight;
+        banners.description = description;
+        banners.link = link;
+        banners.linkText = linkText;
         banners.assetId = assetId;
         banners.updatedAt = Date.now();
         await banners.save();

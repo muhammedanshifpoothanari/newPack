@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 
-const bannerSchema = new mongoose.Schema({
-    highlight: String,
+
+const testimonialSchema = new mongoose.Schema({
     description: String, 
-    link: String, 
-    linkText: String,
     assetId: String,
     isBlocked: {
         type: Boolean,
@@ -14,9 +12,9 @@ const bannerSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    updatedAt: Date,
+    updatedAt: Date
 }, {
-    collection: 'banners'
+    collection: 'testimonial'
 });
 
-module.exports = mongoose.model('Banners', bannerSchema);
+module.exports = mongoose.model('Testimonials',testimonialSchema);

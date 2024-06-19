@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const categorySchema = new mongoose.Schema({
+const personaSchema = new mongoose.Schema({
     name: {
         type: String,
         unique: true,
@@ -18,7 +18,7 @@ const categorySchema = new mongoose.Schema({
     },
     updatedAt: Date
 }, {
-    collection: 'categories'
+    collection: 'personas'
 });
 
-module.exports = mongoose.model('Category',categorySchema);
+module.exports = mongoose.model('Personas',personaSchema);

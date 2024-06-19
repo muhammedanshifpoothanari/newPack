@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 
-const bannerSchema = new mongoose.Schema({
+
+const courseSchema = new mongoose.Schema({
     highlight: String,
     description: String, 
     link: String, 
     linkText: String,
     assetId: String,
+    persona: String,
     isBlocked: {
         type: Boolean,
         default: false,
@@ -14,9 +16,9 @@ const bannerSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    updatedAt: Date,
+    updatedAt: Date
 }, {
-    collection: 'banners'
+    collection: 'courses'
 });
 
-module.exports = mongoose.model('Banners', bannerSchema);
+module.exports = mongoose.model('Courses',courseSchema);

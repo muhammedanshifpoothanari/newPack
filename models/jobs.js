@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 
-const bannerSchema = new mongoose.Schema({
+
+const jobSchema = new mongoose.Schema({
     highlight: String,
     description: String, 
     link: String, 
     linkText: String,
+    avgSalary: String,
+    skillsRequired: String,
+    marketDemand: String,
     assetId: String,
     isBlocked: {
         type: Boolean,
@@ -14,9 +18,9 @@ const bannerSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    updatedAt: Date,
+    updatedAt: Date
 }, {
-    collection: 'banners'
+    collection: 'jobs'
 });
 
-module.exports = mongoose.model('Banners', bannerSchema);
+module.exports = mongoose.model('Jobs',jobSchema);

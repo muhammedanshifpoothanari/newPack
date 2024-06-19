@@ -1,41 +1,30 @@
 const express = require('express');
 const router = express();
-const { login, forgetPassword, updateUser, createSubscriber, deleteUser, getAll , getById, getAddressById} = require('../../controller/user/user.v2')
-const { getAllStock, getStockById, getStockByCategory, updateStock} = require('../../controller/user/stock');
-const { getAllCategory } = require('../../controller/user/category');
-const { getCartById, addToCart , updateCart ,removeFromCart } = require('../../controller/user/cart');
-const { getOrdersById, getOrdersByUserId,createOrder, cancelOrder} = require('../../controller/user/order');
-const { getAllBanners } = require('../../controller/admin/banners');
+const { getAllBanners } = require('../../controller/user/banners');
+
+const { getAllPersonas } = require('../../controller/user/personas');
+const { getAllCourses } = require('../../controller/user/courses');
+const { getAllJobs } = require('../../controller/user/jobs');
+const { createQuery } = require('../../controller/user/query');
+const { getAllTestimonials } = require('../../controller/user/testimonials');
+const { getAllTopProducts } = require('../../controller/user/topProducts');
+
+
 router.use(express.json());
 
-router.post('/login', login);
-router.post('/forgetPassword', forgetPassword);
+router.get('/Personas', getAllPersonas);
 
 
-router.get('/user', getAll);
-router.get('/user/:id', getById);
-router.get('/getAddress/:id', getAddressById);
-router.post('/Subscribers', createSubscriber);
-router.patch('/updateUser', updateUser);
-router.delete('/:id', deleteUser);
-
-router.get('/product', getAllStock);
-router.get('/product/:id', getStockById);
-router.get('/product/byCategory/:category', getStockByCategory);
-router.patch('/updateProduct', updateStock);
-
-router.get('/category', getAllCategory);
-
-router.get('/getCartById/:userId', getCartById);
-router.post('/addToCart', addToCart);
-router.patch('/updateCart', updateCart);
-router.patch('/removeFromCart', removeFromCart);
-
-router.get('/getOrderById/:id', getOrdersById); 
-router.get('/getOrdersByUserId/:userId', getOrdersByUserId); 
-router.post('/createOrder/', createOrder); 
-router.patch('/cancelOrder', cancelOrder);
 router.get('/banners', getAllBanners);
 
+router.get('/courses', getAllCourses);
+
+router.get('/jobs', getAllJobs);
+
+router.post('/query', createQuery);
+
+router.get('/testimonials', getAllTestimonials);
+
+router.get('/topProducts', getAllTopProducts);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const bannerSchema = new mongoose.Schema({
+
+const topProductSchema = new mongoose.Schema({
     highlight: String,
     description: String, 
     link: String, 
@@ -14,9 +15,9 @@ const bannerSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    updatedAt: Date,
+    updatedAt: Date
 }, {
-    collection: 'banners'
+    collection: 'topProducts'
 });
 
-module.exports = mongoose.model('Banners', bannerSchema);
+module.exports = mongoose.model('TopProducts',topProductSchema);

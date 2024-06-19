@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express();
 const { getAllUsers, getUserById, blockUser, setAdmin } = require('../../controller/admin/user');
-const { getAllCategories, createCategory, updateCategory, blockCategory } = require('../../controller/admin/category');
-const { getAllStock, getStockById, createStock, updateStock, blockStock } = require('../../controller/admin/stock');
-const { getAllOrders, getOrdersByUserId, getOrderById, countTotalSalesPerMonth, countTotalSalesPerYear, getAllRecentSales, DeliveredOrder, deliveredOrder } = require('../../controller/admin/order');
 const { getAllBanners, createBanners, updateBanners, blockBanners } = require('../../controller/admin/banners');
+
+const { getAllPersonas, createPersonas, updatePersonas, blockPersonas } = require('../../controller/admin/personas');
+const { getAllCourses, getCourseById, createCourses, updateCourses, blockCourses } = require('../../controller/admin/courses');
+const { getAllJobs, getJobsById, createJobs, updateJobs, blockJobs } = require('../../controller/admin/jobs');
+const { getAllQuerys, getqueryById, countTotalQuerysPerMonth, countTotalQuerysPerYear, getAllRecentQuerys, deliveredquery } = require('../../controller/admin/query');
+const { getAllTestimonials, getTestimonialsById, createTestimonials, updateTestimonials, blockTestimonials } = require('../../controller/admin/testimonials');
+const { getAllTopProducts, getTopProductsById, createTopProducts,  updateTopProducts, blockTopProducts } = require('../../controller/admin/topProducts');
 
 
 router.use(express.json());
@@ -16,10 +20,10 @@ router.patch('/users/setAdmin/:userId', setAdmin);
 
 
 
-router.get('/categories', getAllCategories);
-router.post('/categories', createCategory);
-router.patch('/categories/:categoryId', updateCategory);
-router.patch('/categories/:categoryId/block', blockCategory);
+router.get('/personas', getAllPersonas);
+router.post('/personas', createPersonas);
+router.patch('/personas/:PersonaId', updatePersonas);
+router.patch('/personas/:PersonaId/block', blockPersonas);
 
 router.get('/banners', getAllBanners);
 router.post('/banners', createBanners);
@@ -27,19 +31,35 @@ router.patch('/banners/:BannerId', updateBanners);
 router.patch('/banners/:BannerId/block', blockBanners);
 
 
-router.get('/stocks', getAllStock);
-router.get('/stocks/:stockId', getStockById);
-router.post('/stocks', createStock);
-router.patch('/stocks/:stockId', updateStock);
-router.patch('/stocks/:stockId/block', blockStock);
+router.get('/courses', getAllCourses);
+router.get('/courses/:coursesId', getCourseById);
+router.post('/courses', createCourses);
+router.patch('courses/:coursesId', updateCourses);
+router.patch('/courses/:coursesId/block', blockCourses);
 
+router.get('/jobs', getAllJobs);
+router.get('/jobs/:jobsId', getJobsById);
+router.post('/jobs', createJobs);
+router.patch('/jobs/:jobsId', updateJobs);
+router.patch('/jobs/:jobsId/block', blockJobs);
 
-router.get('/orders', getAllOrders);
-router.get('/orders/user/:userId', getOrdersByUserId);
-router.get('/orders/:orderId', getOrderById);
-router.get('/orders/sales/month/:month', countTotalSalesPerMonth);
-router.get('/orders/sales/year/:year', countTotalSalesPerYear);
-router.get('/orders/recent', getAllRecentSales);
-router.patch('/updateOrder/', deliveredOrder);
+router.get('/querys', getAllQuerys);
+router.get('/querys/:queryId', getqueryById);
+router.get('/querys/sales/month/:month', countTotalQuerysPerMonth);
+router.get('/querys/sales/year/:year', countTotalQuerysPerYear);
+router.get('/querys/recent', getAllRecentQuerys);
+router.patch('/updateQuery/', deliveredquery);
+
+router.get('/testimonials', getAllTestimonials);
+router.get('/testimonials/:testimonialId', getTestimonialsById);
+router.post('/testimonials', createTestimonials);
+router.patch('/testimonials/:testimonialId', updateTestimonials);
+router.patch('/testimonials/:testimonialId/block', blockTestimonials);
+
+router.get('/topProducts', getAllTopProducts);
+router.get('/topProducts/:topProductId', getTopProductsById);
+router.post('/topProducts', createTopProducts);
+router.patch('/topProducts/:topProductId', updateTopProducts);
+router.patch('/topProducts/:topProductId/block', blockTopProducts);
 
 module.exports = router;
